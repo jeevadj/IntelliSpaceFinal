@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <android.support.v4.widget.Space
+        android:id="@+id/space1"
+        android:layout_width="match_parent"
+        android:layout_height="50sp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space1"
+        android:background="@drawable/bg"
+        android:hint="Username"
+        android:padding="5dp" />
+
+    <android.support.v4.widget.Space
+        android:id="@+id/space2"
+        android:layout_width="match_parent"
+        android:layout_height="20sp"
+        android:layout_below="@+id/username" />
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space2"
+        android:background="@drawable/bg"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:padding="5dp" />
+
+    <LinearLayout
+        android:id="@+id/switchLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Text Input "
+            android:theme="@style/SCBSwitch" />
+
+        <TextView
+            android:id="@id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:padding="10dp"
+            android:text="Voice Input"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/switchLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:background="@color/colorPrimary"
+        android:text="Login"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/usignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="New?? Click here to join us"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

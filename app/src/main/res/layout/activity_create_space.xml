@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_space"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.sasi.intellispace.CreateSpace">
+
+
+    <TextView
+        android:text="Create Space !!!!!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CreateSpace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAlignment="center" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/CreateSpace"
+
+        android:id="@+id/space" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/Building"
+        android:layout_below="@+id/space"
+        android:background="@drawable/bg"
+        android:padding="5dp"
+        android:hint="Name of the Building"
+        android:layout_marginBottom="10dp" />
+
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:id="@+id/floor"
+        android:background="@drawable/bg"
+        android:padding="14dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/Building"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:id="@+id/rooms"
+        android:background="@drawable/bg"
+        android:padding="14dp"
+        android:layout_below="@+id/floor"
+        />
+
+    <Button
+        android:text="Create Space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/createspace"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/authui_colorPrimary"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:text="DELETE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/createspace"
+        android:id="@+id/delete"
+        android:backgroundTint="@color/authui_colorPrimary"
+        android:textColor="#FFFFFF" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/rooms"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/space2" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="11dp"
+        android:weightSum="1">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:id="@+id/shortform"
+            android:layout_weight="0.16"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <Spinner
+            android:layout_height="wrap_content"
+            android:id="@+id/NOR"
+            android:gravity="center_vertical|center|start"
+            android:layout_width="75dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</RelativeLayout>

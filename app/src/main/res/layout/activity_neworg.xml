@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_neworg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="37dp"
+        android:id="@+id/orgname"
+        android:hint="Enter Your Organisation Name"
+        android:gravity="center_vertical|center"
+        android:background="@drawable/bg"
+        android:padding="5dp" />
+
+    <Button
+        android:text="Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/register"
+
+        android:background="@color/authui_colorPrimary"
+        android:textColor="#ffffff" />
+</RelativeLayout>

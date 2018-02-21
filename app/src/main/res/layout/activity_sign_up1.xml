@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:gravity="center"
+        android:padding="2dp">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:maxLines="1"
+                android:background="@drawable/bg"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/uname"
+                android:inputType="text"
+                android:layout_marginTop="2dp"
+                android:padding="5dp" />
+
+
+
+
+
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/uemail"
+                android:inputType="text"
+                android:maxLines="1"
+            android:background="@drawable/bg"
+            android:hint="Email"
+            android:layout_marginTop="2dp"
+            android:padding="5dp" />
+
+
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/uphone"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:background="@drawable/bg"
+                android:hint="Phone"
+                android:layout_marginTop="2dp"
+                android:padding="5dp" />
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/udesig"
+                android:inputType="text"
+                android:maxLines="1"
+                android:background="@drawable/bg"
+                android:hint="Designation"
+                android:layout_marginTop="2dp"
+                android:padding="5dp" />
+
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/DOB"
+                android:inputType="text"
+                android:maxLines="1"
+            android:background="@drawable/bg"
+            android:hint="Date of Birth(dd-mm-yyyy)"
+            android:layout_marginTop="2dp"
+            android:padding="5dp" />
+
+
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pass"
+                android:hint="Password"
+                android:inputType="text"
+                android:maxLines="1"
+                android:background="@drawable/bg"
+                android:layout_marginTop="2dp"
+                android:padding="5dp" />
+
+
+
+
+
+        <Button
+            android:text="SignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/signup"
+            android:background="@drawable/butbg"
+            android:textColor="#ffffff"
+            android:layout_marginTop="5dp" />
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+

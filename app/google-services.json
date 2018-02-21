@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "938012622386",
+    "firebase_url": "https://hello-b57b4.firebaseio.com",
+    "project_id": "hello-b57b4",
+    "storage_bucket": "hello-b57b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938012622386:android:4c85adae852e69d0",
+        "android_client_info": {
+          "package_name": "com.example.sasi.intellispace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938012622386-g6nac6o343jinflnframkfc2pedj68bg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGGW4uAZoAUv7bJ7E2ZHlb0U9xn4sJ4IA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
