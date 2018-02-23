@@ -291,7 +291,7 @@ public class rcActivity extends AppCompatActivity
                                         String[] splited3 = BookingAdapter.ET.split(":");
                                         int  EndTime= Integer.parseInt(splited3[0]);
                                         int  StartTime= Integer.parseInt(splited2[0]);
-                                        if(cloudStartTime==StartTime){
+                                        if(cloudStartTime==StartTime||cloudEndTime>StartTime){
                                             checkfloor=floor;
                                             checkroom=room.getKey();
 
