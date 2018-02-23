@@ -1,6 +1,7 @@
 package com.example.sasi.intellispace;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,26 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
+import com.amazonaws.services.simpleemail.model.Body;
+import com.amazonaws.services.simpleemail.model.Content;
+import com.amazonaws.services.simpleemail.model.Destination;
+import com.amazonaws.services.simpleemail.model.Message;
+import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.example.sasi.intellispace.Adapters.BookingAdapter;
+import com.example.sasi.intellispace.Adapters.UploadAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Main2Activity extends AppCompatActivity
 {
@@ -19,6 +39,8 @@ public class Main2Activity extends AppCompatActivity
     Button finish;
     String input;
     int replyCount=0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +64,7 @@ public class Main2Activity extends AppCompatActivity
         r=(EditText)findViewById(R.id.reply);
         finish=(Button)findViewById(R.id.done);
         scrollview=(ScrollView)findViewById(R.id.scrollView);
+
 
 
 
@@ -130,6 +153,8 @@ public class Main2Activity extends AppCompatActivity
         if(replyCount>=7)
         {
             Intent i=new Intent(Main2Activity.this,rcActivity.class);
+            Boolean f = getIntent().getExtras().getBoolean("flag",false);
+            i.putExtra("flag",f);
             i.putExtra("caller","chatActivity");
             startActivity(i);
         }

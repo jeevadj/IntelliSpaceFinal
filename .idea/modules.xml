@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://G:\vimal\IntelliSpace.iml" filepath="G:\vimal\IntelliSpace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IntelliSpaceFinal.iml" filepath="$PROJECT_DIR$/IntelliSpaceFinal.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ispacekiruba.iml" filepath="$PROJECT_DIR$/ispacekiruba.iml" />
+      <module fileurl="file://H:\Final\IntelliSpaceFinal\app\app.iml" filepath="H:\Final\IntelliSpaceFinal\app\app.iml" />
+      <module fileurl="file://H:\Final\IntelliSpaceFinal\ispacekiruba.iml" filepath="H:\Final\IntelliSpaceFinal\ispacekiruba.iml" />
       <module fileurl="file://D:\update\kiruba\ispacekiruba\vimal.iml" filepath="D:\update\kiruba\ispacekiruba\vimal.iml" />
     </modules>
   </component>
