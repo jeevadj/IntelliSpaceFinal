@@ -55,9 +55,13 @@ public class Blank extends AppCompatActivity {
                 BookingAdapter.setBookdate(date);
                 Toast.makeText(Blank.this,  date+"", Toast.LENGTH_SHORT).show();
                 if(f==true) {
-                    startActivity(new Intent(Blank.this,Speechengine.class));
-                }else{
-                    startActivity(new Intent(Blank.this,Main2Activity.class));
+                    Intent intent =new Intent(Blank.this,Speechengine.class);
+                    intent.putExtra("flag",f);
+                    startActivity(intent);
+                }else
+                    {   Intent intent = new Intent(Blank.this,Main2Activity.class);
+                        intent.putExtra("flag",f);
+                        startActivity(intent);
                 }
             }
         });

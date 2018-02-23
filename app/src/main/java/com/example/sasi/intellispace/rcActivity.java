@@ -16,6 +16,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
+import com.amazonaws.services.simpleemail.model.Body;
+import com.amazonaws.services.simpleemail.model.Content;
+import com.amazonaws.services.simpleemail.model.Destination;
+import com.amazonaws.services.simpleemail.model.Message;
+import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.example.sasi.intellispace.Adapters.BookingAdapter;
 import com.example.sasi.intellispace.Adapters.CardAdapter;
 import com.example.sasi.intellispace.Adapters.ConfirmBookingAdapter;
@@ -45,6 +55,15 @@ public class rcActivity extends AppCompatActivity
     DatabaseReference databaseReference;
     String SelectedBuilding;
     TextView emptyview;
+    AmazonSimpleEmailService client;
+    CognitoCachingCredentialsProvider credentials;
+    static final String FROM = "vimaltcs@outlook.com";
+    static final String SUBJECT = "Invitation for the Meeting.";
+
+    static String HTMLBODY = "";
+
+    static final String TEXTBODY = "This email was sent through Amazon SES "
+            + "using the AWS SDK for Java.";
 
 
 
@@ -69,8 +88,16 @@ public class rcActivity extends AppCompatActivity
                                 adapter.setEndtime(BookingAdapter.getET());
 
                                 databaseReference.child("BookedTimings").child(BookingAdapter.al.get(position).getBuilding()).child(BookingAdapter.getRT()).child(BookingAdapter.al.get(position).getFloor()).child(BookingAdapter.al.get(position).getRoom()).child(BookingAdapter.bookdate).push().setValue(adapter);
+                                HTMLBODY = "<h4>Meeting Invitation</h4>"
+                                        + "<p>There is a meeting organised on  "+BookingAdapter.getB() + " at "+ BookingAdapter.al.get(position).getFloor() + " in "+ BookingAdapter.al.get(position).getRoom() + " dated "+ BookingAdapter.bookdate + " in between " + BookingAdapter.getST() + " - " + BookingAdapter.getET()
 
-                                startActivity(new Intent(rcActivity.this,Blank.class));
+                                        + "<p> You are requested to be on time without any excuses.";
+
+                                new SES_Example().execute();
+                                Intent intent = new Intent(rcActivity.this,Blank.class);
+                                Boolean f = getIntent().getExtras().getBoolean("flag",false);
+                                intent .putExtra("flag",f);
+                                startActivity(intent);
                                 finish();
                             }
                         })
@@ -86,7 +113,31 @@ public class rcActivity extends AppCompatActivity
             }
         });
     }
+    public class SES_Example extends AsyncTask<String,String,String>{
+        @Override
+        protected String doInBackground(String... strings) {
 
+
+            SendEmailRequest request = new SendEmailRequest()
+                    .withDestination(
+                            new Destination().withToAddresses("kirugreat@gmail.com","d.jeeva6@gmail.com"))
+                    .withMessage(new Message()
+                            .withBody(new Body()
+                                    .withHtml(new Content()
+                                            .withCharset("UTF-8").withData(HTMLBODY))
+                                    .withText(new Content()
+                                            .withCharset("UTF-8").withData(TEXTBODY)))
+                            .withSubject(new Content()
+                                    .withCharset("UTF-8").withData(SUBJECT)))
+                    .withSource(FROM);
+            // Comment or remove the next line if you are not using a
+            // configuration set
+            // .withConfigurationSetName(CONFIGSET);
+            client.sendEmail(request);
+            System.out.println("Email sent!");
+            return null;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -96,6 +147,9 @@ public class rcActivity extends AppCompatActivity
         building_spinner = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        credentials= new CognitoCachingCredentialsProvider(getApplicationContext(), "us-west-2:c0f1fa86-4263-451c-a754-69c10fb68253", Regions.US_WEST_2);
+        client = new AmazonSimpleEmailServiceClient(credentials);
+        client.setRegion(Region.getRegion(Regions.US_WEST_2));
         hashMap = new HashMap<>();
 
         layoutManager = new LinearLayoutManager(this);
@@ -174,38 +228,52 @@ public class rcActivity extends AppCompatActivity
 
     public void check_room(){
         final int[] a = {0};
-        databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        databaseReference.child("BookedTimings").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(final DataSnapshot child: dataSnapshot.getChildren()){
-                    System.out.println("Floor"+child.getKey());
-                    databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                if (dataSnapshot.hasChild(BookingAdapter.B)){
+                    databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(final DataSnapshot child1:dataSnapshot.getChildren()){
-                                System.out.println("Room Name : "+child1.getKey());
-                                databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            for(final DataSnapshot child: dataSnapshot.getChildren()){
+                                System.out.println("Floor"+child.getKey());
+                                databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        for(final DataSnapshot child2: dataSnapshot.getChildren()){
-                                            System.out.println("Date : "+child2.getKey());
-                                            databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).child(child2.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        for(final DataSnapshot child1:dataSnapshot.getChildren()){
+                                            System.out.println("Room Name : "+child1.getKey());
+                                            databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                                    bookingAdapters = new ArrayList<>();
-                                                    for(DataSnapshot child3: dataSnapshot.getChildren()){
-                                                        ConfirmBookingAdapter confirmBookingAdapter = child3.getValue(ConfirmBookingAdapter.class);
+                                                    for(final DataSnapshot child2: dataSnapshot.getChildren()){
+                                                        System.out.println("Date : "+child2.getKey());
+                                                        databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).child(child2.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                bookingAdapters = new ArrayList<>();
+                                                                for(DataSnapshot child3: dataSnapshot.getChildren()){
+                                                                    ConfirmBookingAdapter confirmBookingAdapter = child3.getValue(ConfirmBookingAdapter.class);
 
-                                                        bookingAdapters.add(0,confirmBookingAdapter);
+                                                                    bookingAdapters.add(0,confirmBookingAdapter);
+                                                                }
+
+                                                                hashMap.put(child.getKey()+"@"+child1.getKey()+"@"+child2.getKey(),bookingAdapters);
+                                                                System.out.println("hash"+hashMap);
+                                                                if(a[0] ==0){
+                                                                    Vacant_Room();
+                                                                    a[0] =1;
+                                                                }
+
+
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
                                                     }
-
-                                                    hashMap.put(child.getKey()+"@"+child1.getKey()+"@"+child2.getKey(),bookingAdapters);
-                                                    System.out.println("hash"+hashMap);
-                                                   if(a[0] ==0){
-                                                       Vacant_Room();
-                                                       a[0] =1;
-                                                   }
-
 
                                                 }
 
@@ -224,7 +292,6 @@ public class rcActivity extends AppCompatActivity
                                     }
                                 });
                             }
-
                         }
 
                         @Override
@@ -233,6 +300,9 @@ public class rcActivity extends AppCompatActivity
                         }
                     });
                 }
+                else{
+                    Vacant_Room();
+                }
             }
 
             @Override
@@ -240,6 +310,7 @@ public class rcActivity extends AppCompatActivity
 
             }
         });
+
         //new Vacant_Room_Lo    ading_Task().execute();
 
 
@@ -291,7 +362,7 @@ public class rcActivity extends AppCompatActivity
                                         String[] splited3 = BookingAdapter.ET.split(":");
                                         int  EndTime= Integer.parseInt(splited3[0]);
                                         int  StartTime= Integer.parseInt(splited2[0]);
-                                        if(cloudStartTime==StartTime||cloudEndTime>StartTime){
+                                        if(cloudStartTime==StartTime){
                                             checkfloor=floor;
                                             checkroom=room.getKey();
 
@@ -403,6 +474,4 @@ public class rcActivity extends AppCompatActivity
             return null;
         }
     }
-
-
 }

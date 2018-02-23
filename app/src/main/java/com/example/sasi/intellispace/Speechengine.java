@@ -183,6 +183,8 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
                 bookingAdapter.setST(timeconvertion(splitted[0]));
                 Intent intetn = new Intent(Speechengine.this,rcActivity.class);
                 intetn.putExtra("caller","Speechengine");
+                Boolean f = getIntent().getExtras().getBoolean("flag",false);
+                intetn.putExtra("flag",f);
                 startActivity(intetn);
 
             }
