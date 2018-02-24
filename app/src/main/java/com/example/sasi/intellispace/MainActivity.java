@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     EditText username;
@@ -40,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mRef, mRef2,admin,admin2;
     String email,Pass,org;
     Switch ch;
-    boolean f=false;
-    String t1,t2;
+    boolean f=false,fl=false;
+    String t1,t2,t3,t4;
     static AmazonSimpleEmailService client;
     CognitoCachingCredentialsProvider credentials;
     static final String FROM = "intellispace.meeting@outlook.com";
@@ -188,15 +190,10 @@ public class MainActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                                         UploadAdapter adapter = dataSnapshot.getValue(UploadAdapter.class);
+                                                        t3=adapter.getEmail();
+                                                        t4=adapter.getPassword();
+                                                        new List_Verified_Task().execute();
 
-                                                        if (adapter.getPassword().equals(Pass)) {
-                                                            Intent i = new Intent(MainActivity.this, Blank.class);
-                                                            i.putExtra("name", adapter.getName());
-                                                            i.putExtra("email", adapter.getEmail());
-                                                            i.putExtra("flag",f);
-                                                            startActivity(i);
-                                                            finish();
-                                                        }
                                                     }
 
                                                     @Override
@@ -264,6 +261,37 @@ public class MainActivity extends AppCompatActivity {
             Looper.prepare();
             Toast.makeText(MainActivity.this, "password has been sent your email", Toast.LENGTH_SHORT).show();
             Looper.loop();
+            return null;
+        }
+    }
+    public class List_Verified_Task extends AsyncTask<String, Integer, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            List<String> result = client.listVerifiedEmailAddresses().getVerifiedEmailAddresses();
+            System.out.println("bowww"+result+" "+t3);
+
+            for(int i=0;i<result.size();i++)
+            {
+                if(t3.equals(result.get(i).toString())){
+                    System.out.println("boww"+result.get(i).toString());
+                    fl=true;
+                }
+            }
+            if (t4.equals(Pass)&&fl==true) {
+                Intent i = new Intent(MainActivity.this, Blank.class);
+                i.putExtra("flag",f);
+                startActivity(i);
+                finish();
+            }
+            else{
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, t3+" is not verified", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             return null;
         }
     }
