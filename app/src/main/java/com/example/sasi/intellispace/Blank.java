@@ -2,6 +2,7 @@ package com.example.sasi.intellispace;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CalendarView;
@@ -18,7 +19,7 @@ public class Blank extends AppCompatActivity {
   String name;
   String date;
     CalendarView cal;
-    ImageButton ib;
+    FloatingActionButton ib;
     boolean f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class Blank extends AppCompatActivity {
 //        name=getIntent().getExtras().getString("name");
         setContentView(R.layout.activity_blank);
         cal= (CalendarView) findViewById(R.id.calendarView);
-        ib= (ImageButton) findViewById(R.id.imageButton);
+        ib= (FloatingActionButton) findViewById(R.id.imageButton);
         Intent i=getIntent();
         f=i.getExtras().getBoolean("flag");
         Toast.makeText(this, "bow "+f, Toast.LENGTH_SHORT).show();

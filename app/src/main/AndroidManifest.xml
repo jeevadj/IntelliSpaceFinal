@@ -36,7 +36,8 @@
         <activity android:name=".Blank2" />
         <activity android:name=".rcActivity" />
         <activity android:name=".spaceCreate" />
-        <activity android:name=".welecomeActivity">
+        <activity android:name=".welecomeActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
