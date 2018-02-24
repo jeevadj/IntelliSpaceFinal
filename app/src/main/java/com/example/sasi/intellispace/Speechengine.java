@@ -39,6 +39,7 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
     String[] speakarray = { " Welcome to IntelliSpace Which Building are you looking for the meeting? ",
                             " Ok! Which Type of Meeting are you looking for! ",
                             "Please tell me your meeting time",
+                            "Please tell me the invitees name"
 
 
     };
@@ -151,6 +152,9 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
 //                    sp.setTimee(starttime);
 //                    db.setValue(sp);
                 }
+                else if(speakCV==4){
+                    invitees=matches.get(0);
+                }
                 speakCV++;
                 a=speakCV;
 
@@ -159,7 +163,7 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
             System.out.println("bow "+matches.get(0));
             System.out.println("bowwwwww "+building+Roomtype+starttime);
 
-            if(speakCV == 4){
+            if(speakCV == 5){
                 String[] splitted = starttime.split("2");
 
                 if(Roomtype.toLowerCase().equals("audio"))

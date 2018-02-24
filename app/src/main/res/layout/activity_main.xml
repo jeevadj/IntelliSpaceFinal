@@ -94,5 +94,16 @@
         android:text="New?? Click here to join us"
         android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usignup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="Forgot password Click here"
+        android:textSize="16sp" />
+
 
 </RelativeLayout>

@@ -136,6 +136,7 @@ public class CreateSpace extends AppCompatActivity {
                 build=edt_Building.getText().toString();
                 Flr=sp_floor.getSelectedItem().toString();
                 Room=sp_rooms.getSelectedItem().toString();
+                System.out.println("bow"+build+Flr+Room);
                 new Delete_Value_Task().execute();
             }
         });
@@ -160,6 +161,75 @@ public class CreateSpace extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
+
+            mref.child("Building").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(build)){
+                        mref.child("Building").child(build).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                System.out.println("Bow "+dataSnapshot.getChildrenCount());
+                                System.out.println("bow "+dataSnapshot.getChildrenCount()+dataSnapshot.getKey());
+                                RoomName = shortfR+NOR.getSelectedItem().toString();
+                                final CreateSpaceAdapter space = new CreateSpaceAdapter();
+                                space.setRoomtype(spinner.getSelectedItem().toString());
+                                final String selectedtype = spinner.getSelectedItem().toString();
+                                mref.child("Building").child(build).child(selectedtype).child(Flr).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        System.out.println("Children  "+dataSnapshot.getChildrenCount());
+                                        for (DataSnapshot child: dataSnapshot.getChildren()){
+                                            if(RoomName.equals(child.getKey())){
+                                                Toast.makeText(CreateSpace.this, "Room already Exists", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
+                                                Toast.makeText(CreateSpace.this, "Room Created...", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                                                System.out.println("stick "+build+selectedtype+Flr+RoomName);
+                                                finish();
+                                            }
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                    else{
+                        RoomName = shortfR+NOR.getSelectedItem().toString();
+                        final CreateSpaceAdapter space = new CreateSpaceAdapter();
+                        space.setRoomtype(spinner.getSelectedItem().toString());
+                        final String selectedtype = spinner.getSelectedItem().toString();
+                        mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
+                        startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                        System.out.println("stick "+build+selectedtype+Flr+RoomName);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             mref.child("Building").child(build).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -213,12 +283,15 @@ public class CreateSpace extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-
+            final String selectedtype = spinner.getSelectedItem().toString();
             RoomName = shortfR+NOR.getSelectedItem().toString();
-            mref.child("Building").child(build).child(Flr).child(RoomName).removeValue(new DatabaseReference.CompletionListener() {
+            mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).removeValue(new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     System.out.println("bowwwwwww");
+                    startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                    Toast.makeText(CreateSpace.this, "Room Deleted..", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
             return null;
