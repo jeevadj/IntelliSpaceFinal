@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.sasi.intellispace.Adapters.BookingAdapter;
@@ -33,6 +34,7 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
     RecognitionProgressView recognitionProgressView;
     Handler handler=new Handler();
     public int speakCV = 0;
+    RelativeLayout relativeLayout;
     HashMap<String, String> map = new HashMap<>();
     public int FirstSpeak = 0;
     String building,Roomtype,starttime,invitees;
@@ -52,6 +54,10 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
         context=Speechengine.this;
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
         speech=(Button)findViewById(R.id.speech);
+        speech.setVisibility(View.GONE);
+
+        relativeLayout = (RelativeLayout)findViewById(R.id.Rlayout);
+
 
         map.put("Ram","ram98@gmail.com");
         map.get("Ram");
@@ -75,12 +81,21 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
                 showResults(results);
             }
         });
-        speech.setOnClickListener(new View.OnClickListener() {
+
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirstSpeak =0;
                 speakCV=0;
-               speak("HI");
+                speak("HI");
+            }
+        });
+        speech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FirstSpeak =0;
+//                speakCV=0;
+//               speak("HI");
 
 
             }
@@ -141,7 +156,7 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
             }
             if(a<speakarray.length){
                 if(speakCV==1){
-                    building=matches.get(0);
+                    building=matches.get(0).toLowerCase();
                 }else if(speakCV==2) {
                     Roomtype = matches.get(0);
                 }else if(speakCV==3){
@@ -164,7 +179,7 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
             System.out.println("bowwwwww "+building+Roomtype+starttime);
 
             if(speakCV == 5){
-                String[] splitted = starttime.split("2");
+                String[] splitted = starttime.split("to");
 
                 if(Roomtype.toLowerCase().equals("audio"))
                 {

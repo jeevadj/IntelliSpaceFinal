@@ -176,35 +176,44 @@ public class CreateSpace extends AppCompatActivity {
                                 final CreateSpaceAdapter space = new CreateSpaceAdapter();
                                 space.setRoomtype(spinner.getSelectedItem().toString());
                                 final String selectedtype = spinner.getSelectedItem().toString();
-                                mref.child("Building").child(build).child(selectedtype).child(Flr).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        System.out.println("Children  "+dataSnapshot.getChildrenCount());
-                                        for (DataSnapshot child: dataSnapshot.getChildren()){
-                                            if(RoomName.equals(child.getKey())){
-                                                Toast.makeText(CreateSpace.this, "Room already Exists", Toast.LENGTH_SHORT).show();
-                                            }
-                                            else{
-                                                mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
-                                                Toast.makeText(CreateSpace.this, "Room Created...", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(CreateSpace.this,CreateSpace.class));
-                                                System.out.println("stick "+build+selectedtype+Flr+RoomName);
-                                                finish();
-                                            }
-                                        }
+                               if(dataSnapshot.hasChild(selectedtype)){
 
-                                    }
+                                   mref.child("Building").child(build).child(selectedtype).child(Flr).addListenerForSingleValueEvent(new ValueEventListener() {
+                                       @Override
+                                       public void onDataChange(DataSnapshot dataSnapshot) {
+                                           System.out.println("Children  "+dataSnapshot.getChildrenCount());
+                                           for (DataSnapshot child: dataSnapshot.getChildren()){
+                                               if(RoomName.equals(child.getKey())){
+                                                   Toast.makeText(CreateSpace.this, "Room already Exists", Toast.LENGTH_SHORT).show();
+                                               }
+                                               else{
+                                                   mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
+                                                   Toast.makeText(CreateSpace.this, "Room Created...", Toast.LENGTH_SHORT).show();
+                                                   startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                                                   System.out.println("stick "+build+selectedtype+Flr+RoomName);
+                                                   finish();
+                                               }
+                                           }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                       }
 
-                                    }
-                                });
+                                       @Override
+                                       public void onCancelled(DatabaseError databaseError) {
+
+                                       }
+                                   });
 
 
 
 
 
+                               }else{
+                                  
+                                   mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
+                                   startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                                   System.out.println("stick "+build+selectedtype+Flr+RoomName);
+                                   finish();
+                               }
                             }
 
                             @Override

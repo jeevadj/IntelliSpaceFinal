@@ -57,7 +57,7 @@ public class rcActivity extends AppCompatActivity
     TextView emptyview;
     AmazonSimpleEmailService client;
     CognitoCachingCredentialsProvider credentials;
-    static final String FROM = "vimaltcs@outlook.com";
+    static final String FROM = "intellispace.meeting@outlook.com";
     static final String SUBJECT = "Invitation for the Meeting.";
 
     static String HTMLBODY = "";
@@ -120,7 +120,7 @@ public class rcActivity extends AppCompatActivity
 
             SendEmailRequest request = new SendEmailRequest()
                     .withDestination(
-                            new Destination().withToAddresses("kirugreat@gmail.com","d.jeeva6@gmail.com"))
+                            new Destination().withToAddresses("sasidharan22896@gmail.com","vimaltcs@outlook.com"))
                     .withMessage(new Message()
                             .withBody(new Body()
                                     .withHtml(new Content()
@@ -169,6 +169,7 @@ public class rcActivity extends AppCompatActivity
 
         recyclerView.setLayoutManager(layoutManager);
         BuildingSpinnner = (Spinner)findViewById(R.id.buildingspinner);
+        BuildingSpinnner.setVisibility(View.GONE);
         emptyview =(TextView)findViewById(R.id.textView2);
         String caller = getIntent().getExtras().get("caller").toString();
         System.out.println("bowwww"+caller);
