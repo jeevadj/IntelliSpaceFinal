@@ -68,9 +68,10 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
                 ContextCompat.getColor(this,R.color.colorPrimary),
                 ContextCompat.getColor(this, R.color.colorPrimary),
                 ContextCompat.getColor(this, R.color.colorPrimary),
+                ContextCompat.getColor(this, R.color.colorPrimary),
                 ContextCompat.getColor(this, R.color.colorPrimary)
         };
-        int[] heights = {60, 76, 58, 80, 55};
+        int[] heights = {60, 76, 58, 80, 55, 63};
         recognitionProgressView.setColors(colors);
         recognitionProgressView.setBarMaxHeightsInDp(heights);
         recognitionProgressView.play();
