@@ -123,7 +123,7 @@
         android:layout_below="@+id/usignup"
         android:layout_marginTop="63dp"
         android:gravity="center"
-        android:text="Forgot password ? Click here"
+        android:text="Forgot password Click here"
         android:textColor="@color/bg"
         android:textSize="16sp" />
 
