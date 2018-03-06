@@ -1,6 +1,7 @@
 package com.example.sasi.intellispace;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -281,6 +282,10 @@ public class MainActivity extends AppCompatActivity {
             if (t4.equals(Pass)&&fl==true) {
                 Intent i = new Intent(MainActivity.this, Blank.class);
                 i.putExtra("flag",f);
+                SharedPreferences sharedPreferences = getSharedPreferences("dataset",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Name",email);
+                editor.commit();
                 startActivity(i);
                 finish();
             }

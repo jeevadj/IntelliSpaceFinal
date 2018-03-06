@@ -2,6 +2,7 @@ package com.example.sasi.intellispace;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -87,18 +88,28 @@ public class rcActivity extends AppCompatActivity
                                 adapter.setStarttime(BookingAdapter.getST());
                                 adapter.setEndtime(BookingAdapter.getET());
 
-                                databaseReference.child("BookedTimings").child(BookingAdapter.al.get(position).getBuilding()).child(BookingAdapter.getRT()).child(BookingAdapter.al.get(position).getFloor()).child(BookingAdapter.al.get(position).getRoom()).child(BookingAdapter.bookdate).push().setValue(adapter);
-                                HTMLBODY = "<h4>Meeting Invitation</h4>"
-                                        + "<p>There is a meeting organised on  "+BookingAdapter.getB() + " at "+ BookingAdapter.al.get(position).getFloor() + " in "+ BookingAdapter.al.get(position).getRoom() + " dated "+ BookingAdapter.bookdate + " in between " + BookingAdapter.getST() + " - " + BookingAdapter.getET()
+                                SharedPreferences sharedPreferences = getSharedPreferences("dataset",MODE_PRIVATE);
+                                String username = sharedPreferences.getString("Name",null);
 
-                                        + "<p> You are requested to be on time without any excuses.";
+                                if(username!=null){
+                                    databaseReference.child("BookedTimings").child(BookingAdapter.al.get(position).getBuilding()).child(BookingAdapter.getRT()).child(BookingAdapter.al.get(position).getFloor()).child(BookingAdapter.al.get(position).getRoom()).child(BookingAdapter.bookdate).push().setValue(adapter);
+                                    databaseReference.child("UsersBooking").child(username).child(BookingAdapter.al.get(position).getBuilding()).child(BookingAdapter.al.get(position).getFloor()).child(BookingAdapter.al.get(position).getRoom()).child(BookingAdapter.bookdate).push().setValue(adapter);
+                                    HTMLBODY = "<h4>Meeting Invitation</h4>"
+                                            + "<p>There is a meeting organised on  "+BookingAdapter.getB() + " at "+ BookingAdapter.al.get(position).getFloor() + " in "+ BookingAdapter.al.get(position).getRoom() + " dated "+ BookingAdapter.bookdate + " in between " + BookingAdapter.getST() + " - " + BookingAdapter.getET()
 
-                                new SES_Example().execute();
-                                Intent intent = new Intent(rcActivity.this,Blank.class);
-                                Boolean f = getIntent().getExtras().getBoolean("flag",false);
-                                intent .putExtra("flag",f);
-                                startActivity(intent);
-                                finish();
+                                            + "<p> You are requested to be on time without any excuses.";
+
+                                    new SES_Example().execute();
+                                    Intent intent = new Intent(rcActivity.this,Blank.class);
+                                    Boolean f = getIntent().getExtras().getBoolean("flag",false);
+                                    intent .putExtra("flag",f);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else{
+                                    Toast.makeText(rcActivity.this, "Username is not Recognized...", Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -363,7 +374,7 @@ public class rcActivity extends AppCompatActivity
                                         String[] splited3 = BookingAdapter.ET.split(":");
                                         int  EndTime= Integer.parseInt(splited3[0]);
                                         int  StartTime= Integer.parseInt(splited2[0]);
-                                        if(cloudStartTime==StartTime&&StartTime>cloudEndTime){
+                                        if(cloudStartTime==StartTime){
                                             checkfloor=floor;
                                             checkroom=room.getKey();
 
