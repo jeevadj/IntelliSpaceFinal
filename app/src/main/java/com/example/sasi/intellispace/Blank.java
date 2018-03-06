@@ -110,7 +110,9 @@ public class Blank extends AppCompatActivity {
                                                                                         for (DataSnapshot child:dataSnapshot.getChildren()){
                                                                                             System.out.println("Bow"+child.getKey());
                                                                                             ConfirmBookingAdapter confirmBookingAdapter = child.getValue(ConfirmBookingAdapter.class);
-                                                                                            itemlist.add(0,new EventAdapter(building.getKey(),floor.getKey(),confirmBookingAdapter.getDate(),confirmBookingAdapter.getStarttime(),confirmBookingAdapter.getEndtime(),Room.getKey()));
+                                                                                            if(!itemlist.contains(new EventAdapter(building.getKey(),floor.getKey(),confirmBookingAdapter.getDate(),confirmBookingAdapter.getStarttime(),confirmBookingAdapter.getEndtime(),Room.getKey()))){
+                                                                                                itemlist.add(0,new EventAdapter(building.getKey(),floor.getKey(),confirmBookingAdapter.getDate(),confirmBookingAdapter.getStarttime(),confirmBookingAdapter.getEndtime(),Room.getKey()));
+                                                                                            }
 
                                                                                         }
                                                                                         event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
