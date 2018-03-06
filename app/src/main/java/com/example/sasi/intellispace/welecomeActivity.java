@@ -24,7 +24,8 @@ public class welecomeActivity extends AppCompatActivity {
 //        l1.setAnimation(uptodown);
 //        l2.setAnimation(downtoup);
         Handler handler=new Handler();
-        handler.postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable()
+        {
             @Override
             public void run() {
                 startActivity(new Intent(welecomeActivity.this,OrgSignIn.class));
