@@ -1,5 +1,8 @@
 package com.example.sasi.intellispace;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -138,26 +141,45 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            login.setOnClickListener(new View.OnClickListener() {
+            login.setOnClickListener(new View.OnClickListener()
+            {
+                ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view)
+                {
+                    progressDialog.setMessage("Validating Credentials");
+                    progressDialog.show();
+
+                    builder.setTitle("Invlaid Credentaials");
+                    builder.setMessage("Enter a Registered UserName and Password");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
                     email=username.getText().toString();
                     Pass=pass.getText().toString();
 //                    Toast.makeText(MainActivity.this, "bow "+f , Toast.LENGTH_SHORT).show();
 
-                    if (!TextUtils.isEmpty(email)&&!TextUtils.isEmpty(Pass)) {
-
-                        admin.addValueEventListener(new ValueEventListener() {
+                    if (!TextUtils.isEmpty(email)&&!TextUtils.isEmpty(Pass))
+                    {
+                        admin.addValueEventListener(new ValueEventListener()
+                        {
                             @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.hasChild(email)) {
+                            public void onDataChange(DataSnapshot dataSnapshot)
+                            {
+                                if (dataSnapshot.hasChild(email))
+                                {
                                     if(Pass.equals("admin"))
                                     {
                                         Intent i = new Intent(MainActivity.this, CreateSpace.class);
-
                                              //   i.putExtra("email", adapter.getEmail());
-                                                startActivity(i);
-                                                finish();
+                                        progressDialog.dismiss();
+                                        startActivity(i);
+                                        finish();
                                     }
 //                                    admin2 = admin.child(email);
 //                                    admin2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -193,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
                                                         UploadAdapter adapter = dataSnapshot.getValue(UploadAdapter.class);
                                                         t3=adapter.getEmail();
                                                         t4=adapter.getPassword();
+                                                        progressDialog.dismiss();
                                                         new List_Verified_Task().execute();
 
                                                     }
@@ -202,6 +225,12 @@ public class MainActivity extends AppCompatActivity {
 
                                                     }
                                                 });
+                                            }
+                                            else
+                                            {
+                                                progressDialog.dismiss();
+                                                builder.show();
+//                                                Toast.makeText(MainActivity.this, "Invalid Credentials...", Toast.LENGTH_SHORT).show();
                                             }
                                         }
 
@@ -219,9 +248,6 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         });
-
-
-
 
                     }
                     else

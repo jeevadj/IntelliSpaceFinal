@@ -1,10 +1,12 @@
 package com.example.sasi.intellispace;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -89,6 +91,7 @@ public class Main2Activity extends AppCompatActivity
         });
     }
 
+    @SuppressLint("ResourceAsColor")
     public void setreply()
     {
         if(replyCount==1)
@@ -148,6 +151,7 @@ public class Main2Activity extends AppCompatActivity
         {
             a6.setText(input);
             a6.setVisibility(View.VISIBLE);
+            r.setVisibility(View.INVISIBLE);
             finish.setText("Done");
         }
         if(replyCount>=7)

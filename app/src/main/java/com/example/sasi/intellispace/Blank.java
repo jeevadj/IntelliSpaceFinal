@@ -58,7 +58,7 @@ public class Blank extends AppCompatActivity {
 
         Intent i=getIntent();
         f=i.getExtras().getBoolean("flag");
-        Toast.makeText(this, "bow "+f, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "bow "+f, Toast.LENGTH_SHORT).show();
         Date dat = Calendar.getInstance().getTime();
         SimpleDateFormat form= new SimpleDateFormat("dd-MM-yyyy");
         date = form.format(dat);
