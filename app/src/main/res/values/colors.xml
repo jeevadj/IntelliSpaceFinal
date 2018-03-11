@@ -9,4 +9,6 @@
     <color name="bg">#f1f1f1</color>
     <color name="lightorangedark">#ebd6ab</color>
     <color name="lightorange">#fdf2df</color>
+    <color name="chatbutton">#000000</color>
+    <color name="White">#ffffff</color>
 </resources>

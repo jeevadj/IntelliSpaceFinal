@@ -1,5 +1,8 @@
 package com.example.sasi.intellispace;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +26,8 @@ public class OrgSignIn extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_sign_in);
         orgname= (EditText) findViewById(R.id.orgname);
@@ -40,10 +44,28 @@ public class OrgSignIn extends AppCompatActivity {
 
 
 
-        con.setOnClickListener(new View.OnClickListener() {
+        con.setOnClickListener(new View.OnClickListener()
+        {
+            ProgressDialog progressDialog = new ProgressDialog(OrgSignIn.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(OrgSignIn.this);
+
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Namo=orgname.getText().toString();
+                progressDialog.setMessage("Searching for "+ Namo +" Organisation Details");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                builder.setTitle("No Organisation Found");
+                builder.setMessage("Please Register Your Organisation");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+
                 if (!TextUtils.isEmpty(Namo))
                 {
                     mRef.addValueEventListener(new ValueEventListener() {
@@ -52,11 +74,14 @@ public class OrgSignIn extends AppCompatActivity {
                             if (dataSnapshot.hasChild(Namo)) {
                               Intent i=new Intent(OrgSignIn.this,MainActivity.class);
                                 i.putExtra("key",Namo);
-                             startActivity(i);
+                                progressDialog.dismiss();
+                                startActivity(i);
                             }
                             else
                             {
-                                Toast.makeText(OrgSignIn.this, "Please Register Your Organisation", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                                builder.show();
+//                                Toast.makeText(OrgSignIn.this, "Please Register Your Organisation", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -65,13 +90,8 @@ public class OrgSignIn extends AppCompatActivity {
 
                         }
                     });
-
                 }
-                }
-
-
-
+            }
         });
-
     }
 }

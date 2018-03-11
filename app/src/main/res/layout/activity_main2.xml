@@ -88,7 +88,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-
                             android:padding="10dp"
                             android:text="@string/question2"
                             android:textColor="@color/bg"
@@ -114,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-
+                            android:textColor="@color/bg"
                             android:padding="10dp"
                             android:visibility="gone" />
                     </RelativeLayout>
@@ -214,7 +213,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:padding="10dp"
-
+                            android:textColor="@color/bg"
                             android:visibility="gone" />
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
@@ -311,7 +310,6 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:gravity="right"
-
                             android:padding="10dp"
                             android:textColor="@color/bg"
                             android:visibility="gone" />
@@ -329,14 +327,15 @@
             android:layout_margin="5dp"
             android:gravity="bottom"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="3dp">
 
             <EditText
                 android:id="@+id/reply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:background="@color/bg"/>
 
             <Button
                 android:id="@+id/done"
