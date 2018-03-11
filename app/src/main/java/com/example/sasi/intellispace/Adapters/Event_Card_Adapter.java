@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class Event_Card_Adapter extends RecyclerView.Adapter<Event_Card_Adapter.ViewHolder> {
     public int LayoutId;
+    public static Event_Card_Adapter.MyClickListener myClickListener;
     public ArrayList<EventAdapter> itemlist = new ArrayList<>();
 
     public Event_Card_Adapter(int layoutId, ArrayList<EventAdapter> itemlist) {
@@ -60,6 +61,20 @@ public class Event_Card_Adapter extends RecyclerView.Adapter<Event_Card_Adapter.
             t3=(TextView)itemView.findViewById(R.id.room_name);
             t4=(TextView)itemView.findViewById(R.id.start_time);
             t5=(TextView)itemView.findViewById(R.id.end_time);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myClickListener.onItemClick(getAdapterPosition(), v);
+                }
+            });
         }
+    }
+
+    public interface MyClickListener{
+        void onItemClick(int position,View v);
+    }
+    public void setOnItemClickListener(Event_Card_Adapter.MyClickListener myClickListener){
+        this.myClickListener = myClickListener;
     }
 }

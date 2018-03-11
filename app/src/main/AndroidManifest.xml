@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Neworg" />
         <activity android:name=".OrgSignIn" />
         <activity android:name=".SignUp1" />
@@ -36,7 +36,8 @@
         <activity android:name=".Blank2" />
         <activity android:name=".rcActivity" />
         <activity android:name=".spaceCreate" />
-        <activity android:name=".welecomeActivity"
+        <activity
+            android:name=".welecomeActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,7 +55,8 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name=".Main2Activity"></activity>
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".EventCardClickActivity"></activity>
     </application>
 
 </manifest>
