@@ -74,7 +74,7 @@ public class Blank extends AppCompatActivity {
         itemlist = new ArrayList<>();
         event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
         f=i.getExtras().getBoolean("flag");
-        Toast.makeText(this, "bow "+f, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "bow "+f, Toast.LENGTH_SHORT).show();
         Date dat = Calendar.getInstance().getTime();
         SimpleDateFormat form= new SimpleDateFormat("dd-MM-yyyy");
         date = form.format(dat);
@@ -127,19 +127,26 @@ public class Blank extends AppCompatActivity {
                                                                                         for (DataSnapshot child:dataSnapshot.getChildren()){
                                                                                             System.out.println("Bow"+child.getKey());
                                                                                             ConfirmBookingAdapter confirmBookingAdapter = child.getValue(ConfirmBookingAdapter.class);
+                                                                                            System.out.println("boww"+!itemlist.contains(new EventAdapter(building.getKey(),floor.getKey(),confirmBookingAdapter.getDate(),confirmBookingAdapter.getStarttime(),confirmBookingAdapter.getEndtime(),Room.getKey())));
                                                                                             if(!itemlist.contains(new EventAdapter(building.getKey(),floor.getKey(),confirmBookingAdapter.getDate(),confirmBookingAdapter.getStarttime(),confirmBookingAdapter.getEndtime(),Room.getKey()))){
                                                                                                 itemlist.add(0,new EventAdapter(building.getKey(),floor.getKey(),confirmBookingAdapter.getDate(),confirmBookingAdapter.getStarttime(),confirmBookingAdapter.getEndtime(),Room.getKey()));
                                                                                             }
 
                                                                                         }
+                                                                                        System.out.println("bow"+itemlist);
+                                                                                        selectdate.setText(date);
                                                                                         event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
                                                                                         recyclerView.setAdapter(event_card_adapter);
                                                                                     }
                                                                                     else{
-                                                                                         selectdate.setText("No Events");
-                                                                                         itemlist.clear();
-                                                                                        event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
-                                                                                        recyclerView.setAdapter(event_card_adapter);
+                                                                                        if(itemlist.isEmpty()){
+                                                                                            System.out.println("bow1");
+                                                                                            selectdate.setText("No Events");
+                                                                                            itemlist.clear();
+                                                                                            event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
+                                                                                            recyclerView.setAdapter(event_card_adapter);
+                                                                                        }
+
 
                                                                                     }
 
@@ -152,10 +159,15 @@ public class Blank extends AppCompatActivity {
                                                                                 }
                                                                             });
                                                                         }else{
-                                                                            selectdate.setText("No Events");
-                                                                            itemlist.clear();
-                                                                            event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
-                                                                            recyclerView.setAdapter(event_card_adapter);
+                                                                            if(itemlist.isEmpty()){
+                                                                                System.out.println("bow2");
+                                                                                selectdate.setText("No Events");
+                                                                                itemlist.clear();
+                                                                                event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
+                                                                                recyclerView.setAdapter(event_card_adapter);
+                                                                            }
+
+
                                                                         }
 
                                                                     }
@@ -167,10 +179,15 @@ public class Blank extends AppCompatActivity {
                                                                 });
                                                             }
                                                         }else{
-                                                            selectdate.setText("No Events");
-                                                            itemlist.clear();
-                                                            event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
-                                                            recyclerView.setAdapter(event_card_adapter);
+                                                            if(itemlist.isEmpty()){
+                                                                System.out.println("bow3");
+                                                                selectdate.setText("No Events");
+                                                                itemlist.clear();
+                                                                event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
+                                                                recyclerView.setAdapter(event_card_adapter);
+                                                            }
+
+
                                                         }
 
                                                     }
@@ -182,12 +199,16 @@ public class Blank extends AppCompatActivity {
                                                 });
                                             }
                                         }else{
-                                            selectdate.setText("No Events");
-                                            itemlist.clear();
-                                            event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
-                                            recyclerView.setAdapter(event_card_adapter);
-                                        }
+                                            if(itemlist.isEmpty()){
+                                                System.out.println("bow4");
+                                                selectdate.setText("No Events");
+                                                itemlist.clear();
+                                                event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
+                                                recyclerView.setAdapter(event_card_adapter);
+                                            }
 
+
+                                        }
                                     }
 
                                     @Override
@@ -197,10 +218,15 @@ public class Blank extends AppCompatActivity {
                                 });
                             }
                         }else{
-                            selectdate.setText("No Events");
-                            itemlist.clear();
-                            event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
-                            recyclerView.setAdapter(event_card_adapter);
+                            if(itemlist.isEmpty()){
+                                System.out.println("bow5");
+                                selectdate.setText("No Events");
+                                itemlist.clear();
+                                event_card_adapter = new Event_Card_Adapter(R.layout.eventscard,itemlist);
+                                recyclerView.setAdapter(event_card_adapter);
+                            }
+
+
                         }
 
                     }

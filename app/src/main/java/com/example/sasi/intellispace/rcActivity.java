@@ -100,11 +100,7 @@ public class rcActivity extends AppCompatActivity
                                             + "<p> You are requested to be on time without any excuses.";
 
                                     new SES_Example().execute();
-                                    Intent intent = new Intent(rcActivity.this,Blank.class);
-                                    Boolean f = getIntent().getExtras().getBoolean("flag",false);
-                                    intent .putExtra("flag",f);
-                                    startActivity(intent);
-                                    finish();
+
                                 }
                                 else{
                                     Toast.makeText(rcActivity.this, "Username is not Recognized...", Toast.LENGTH_SHORT).show();
@@ -131,7 +127,7 @@ public class rcActivity extends AppCompatActivity
 
             SendEmailRequest request = new SendEmailRequest()
                     .withDestination(
-                            new Destination().withToAddresses("sasidharan22896@gmail.com","vimaltcs@outlook.com"))
+                            new Destination().withToAddresses("sasidharan22896@gmail.com","vimal06vishwa@gmail.com"))
                     .withMessage(new Message()
                             .withBody(new Body()
                                     .withHtml(new Content()
@@ -144,8 +140,14 @@ public class rcActivity extends AppCompatActivity
             // Comment or remove the next line if you are not using a
             // configuration set
             // .withConfigurationSetName(CONFIGSET);
+            System.out.println("bow"+request);
             client.sendEmail(request);
             System.out.println("Email sent!");
+            Intent intent = new Intent(rcActivity.this,Blank.class);
+            Boolean f = getIntent().getExtras().getBoolean("flag",false);
+            intent .putExtra("flag",f);
+            startActivity(intent);
+            finish();
             return null;
         }
     }
