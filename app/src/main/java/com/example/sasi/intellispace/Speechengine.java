@@ -180,7 +180,14 @@ public class Speechengine extends AppCompatActivity implements  TextToSpeech.OnI
             System.out.println("bowwwwww "+building+Roomtype+starttime);
 
             if(speakCV == 5){
-                String[] splitted = starttime.split("to");
+                String[] splitted = null;
+                if(starttime.contains("2")){
+                    splitted = starttime.split("2");
+                }
+                else if(starttime.contains("to")){
+                    splitted = starttime.split("to");
+                }
+
 
                 if(Roomtype.toLowerCase().equals("audio"))
                 {

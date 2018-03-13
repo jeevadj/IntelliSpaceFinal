@@ -182,18 +182,28 @@ public class CreateSpace extends AppCompatActivity {
                                        @Override
                                        public void onDataChange(DataSnapshot dataSnapshot) {
                                            System.out.println("Children  "+dataSnapshot.getChildrenCount());
-                                           for (DataSnapshot child: dataSnapshot.getChildren()){
-                                               if(RoomName.equals(child.getKey())){
-                                                   Toast.makeText(CreateSpace.this, "Room already Exists", Toast.LENGTH_SHORT).show();
-                                               }
-                                               else{
-                                                   mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
-                                                   Toast.makeText(CreateSpace.this, "Room Created...", Toast.LENGTH_SHORT).show();
-                                                   startActivity(new Intent(CreateSpace.this,CreateSpace.class));
-                                                   System.out.println("stick "+build+selectedtype+Flr+RoomName);
-                                                   finish();
+                                           if(dataSnapshot.hasChild(RoomName)){
+                                               for (DataSnapshot child: dataSnapshot.getChildren()){
+                                                   if(RoomName.equals(child.getKey())){
+                                                       Toast.makeText(CreateSpace.this, "Room already Exists", Toast.LENGTH_SHORT).show();
+                                                   }
+                                                   else{
+                                                       mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
+                                                       Toast.makeText(CreateSpace.this, "Room Created...", Toast.LENGTH_SHORT).show();
+                                                       startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                                                       System.out.println("stick "+build+selectedtype+Flr+RoomName);
+                                                       finish();
+                                                   }
                                                }
                                            }
+                                           else{
+                                               mref.child("Building").child(build).child(selectedtype).child(Flr).child(RoomName).setValue(space);
+                                               Toast.makeText(CreateSpace.this, "Room Created...", Toast.LENGTH_SHORT).show();
+                                               startActivity(new Intent(CreateSpace.this,CreateSpace.class));
+                                               System.out.println("stick "+build+selectedtype+Flr+RoomName);
+                                               finish();
+                                           }
+
 
                                        }
 

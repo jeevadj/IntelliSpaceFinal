@@ -3,15 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://G:\vimal\IntelliSpace.iml" filepath="G:\vimal\IntelliSpace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IntelliSpaceFinal.iml" filepath="$PROJECT_DIR$/IntelliSpaceFinal.iml" />
       <module fileurl="file://C:\Users\HP\Desktop\IntelliSpaceFinal\IntelliSpaceFinal.iml" filepath="C:\Users\HP\Desktop\IntelliSpaceFinal\IntelliSpaceFinal.iml" />
       <module fileurl="file://C:\new Demo-Final\IntelliSpaceFinal\IntelliSpaceFinal.iml" filepath="C:\new Demo-Final\IntelliSpaceFinal\IntelliSpaceFinal.iml" />
       <module fileurl="file://D:\update\kiruba\ispacekiruba\IntelliSpaceFinal.iml" filepath="D:\update\kiruba\ispacekiruba\IntelliSpaceFinal.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\new Demo-Final\IntelliSpaceFinal\app\app.iml" filepath="C:\new Demo-Final\IntelliSpaceFinal\app\app.iml" />
       <module fileurl="file://C:\Users\HP\Desktop\IntelliSpaceFinal\app\app.iml" filepath="C:\Users\HP\Desktop\IntelliSpaceFinal\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ispacekiruba.iml" filepath="$PROJECT_DIR$/ispacekiruba.iml" />
       <module fileurl="file://C:\Users\HP\AndroidStudioProjects\Jeeva\IntelliSpaceFinal\ispacekiruba.iml" filepath="C:\Users\HP\AndroidStudioProjects\Jeeva\IntelliSpaceFinal\ispacekiruba.iml" />
       <module fileurl="file://H:\Final\IntelliSpaceFinal\ispacekiruba.iml" filepath="H:\Final\IntelliSpaceFinal\ispacekiruba.iml" />
+      <module fileurl="file://E:\Sasi\IntelliSpaceFinal\ispacekiruba.iml" filepath="E:\Sasi\IntelliSpaceFinal\ispacekiruba.iml" />
       <module fileurl="file://D:\update\kiruba\ispacekiruba\vimal.iml" filepath="D:\update\kiruba\ispacekiruba\vimal.iml" />
     </modules>
   </component>

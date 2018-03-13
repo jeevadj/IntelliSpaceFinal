@@ -244,39 +244,55 @@ public class rcActivity extends AppCompatActivity
         databaseReference.child("BookedTimings").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("boww"+dataSnapshot.hasChild(BookingAdapter.B));
                 if (dataSnapshot.hasChild(BookingAdapter.B)){
-                    databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).addListenerForSingleValueEvent(new ValueEventListener() {
+                    databaseReference.child("BookedTimings").child(BookingAdapter.B).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(final DataSnapshot child: dataSnapshot.getChildren()){
-                                System.out.println("Floor"+child.getKey());
-                                databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            System.out.println("boww"+dataSnapshot.hasChild(BookingAdapter.RT));
+                            if(dataSnapshot.hasChild(BookingAdapter.RT)){
+                                databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        for(final DataSnapshot child1:dataSnapshot.getChildren()){
-                                            System.out.println("Room Name : "+child1.getKey());
-                                            databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        for(final DataSnapshot child: dataSnapshot.getChildren()){
+                                            System.out.println("Floor"+child.getKey());
+                                            databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                                    for(final DataSnapshot child2: dataSnapshot.getChildren()){
-                                                        System.out.println("Date : "+child2.getKey());
-                                                        databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).child(child2.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    for(final DataSnapshot child1:dataSnapshot.getChildren()){
+                                                        System.out.println("Room Name : "+child1.getKey());
+                                                        databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                bookingAdapters = new ArrayList<>();
-                                                                for(DataSnapshot child3: dataSnapshot.getChildren()){
-                                                                    ConfirmBookingAdapter confirmBookingAdapter = child3.getValue(ConfirmBookingAdapter.class);
+                                                                for(final DataSnapshot child2: dataSnapshot.getChildren()){
+                                                                    System.out.println("Date : "+child2.getKey());
+                                                                    databaseReference.child("BookedTimings").child(BookingAdapter.B).child(BookingAdapter.RT).child(child.getKey()).child(child1.getKey()).child(child2.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                            bookingAdapters = new ArrayList<>();
+                                                                            for(DataSnapshot child3: dataSnapshot.getChildren()){
+                                                                                ConfirmBookingAdapter confirmBookingAdapter = child3.getValue(ConfirmBookingAdapter.class);
 
-                                                                    bookingAdapters.add(0,confirmBookingAdapter);
+                                                                                bookingAdapters.add(0,confirmBookingAdapter);
+                                                                            }
+
+                                                                            hashMap.put(child.getKey()+"@"+child1.getKey()+"@"+child2.getKey(),bookingAdapters);
+                                                                            System.out.println("hash"+hashMap);
+                                                                            if(a[0] ==0){
+                                                                                Vacant_Room();
+                                                                                a[0] =1;
+                                                                            }
+
+
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                                        }
+                                                                    });
                                                                 }
-
-                                                                hashMap.put(child.getKey()+"@"+child1.getKey()+"@"+child2.getKey(),bookingAdapters);
-                                                                System.out.println("hash"+hashMap);
-                                                                if(a[0] ==0){
-                                                                    Vacant_Room();
-                                                                    a[0] =1;
-                                                                }
-
 
                                                             }
 
@@ -295,7 +311,6 @@ public class rcActivity extends AppCompatActivity
                                                 }
                                             });
                                         }
-
                                     }
 
                                     @Override
@@ -303,7 +318,10 @@ public class rcActivity extends AppCompatActivity
 
                                     }
                                 });
+                            }else{
+                                Vacant_Room();
                             }
+
                         }
 
                         @Override
@@ -311,6 +329,7 @@ public class rcActivity extends AppCompatActivity
 
                         }
                     });
+
                 }
                 else{
                     Vacant_Room();
