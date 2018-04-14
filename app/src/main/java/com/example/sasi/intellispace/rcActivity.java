@@ -127,7 +127,7 @@ public class rcActivity extends AppCompatActivity
 
             SendEmailRequest request = new SendEmailRequest()
                     .withDestination(
-                            new Destination().withToAddresses("sasidharan22896@gmail.com","vimal06vishwa@gmail.com"))
+                            new Destination().withToAddresses("sasidharan22896@gmail.com","vimal06vishwa@gmail.com","srivatsan.c@gmail.com"))
                     .withMessage(new Message()
                             .withBody(new Body()
                                     .withHtml(new Content()
@@ -236,8 +236,6 @@ public class rcActivity extends AppCompatActivity
 
             }
         });
-
-
     }
 
     public void check_room(){
